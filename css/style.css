@@ -1,0 +1,132 @@
+/* =========================================
+   1) VARIÁVEIS DE CORES (tema do app)
+   =========================================
+   :root guarda "variáveis CSS" (--nome) que podem ser usadas no projeto inteiro.
+   Vantagem: muda o tema todo só mexendo aqui.
+*/
+
+:root {
+  --bg: #3c415b;                      /* cor de fundo principal (escura) */
+  --card: #171a2b;                    /* cor das caixas (cards) */
+  --text: #f2f3f7;                    /* cor do texto principal */
+  --muted: #a9acc0;                   /* texto “apagado” (descrições) */
+  --primary: #6c5ce7;                 /* cor de ação (botões principais) */
+  --danger: #ff5d5d;                  /* cor de alerta/remoção (ex: favorito ativo) */
+  --success: #2ecc71;                 /* cor de sucesso (se quiser usar depois) */
+  --border: rgba(255,255,255,0.08);   /* borda suave (transparente) */
+}
+
+/* =========================================
+   2) RESET BÁSICO
+   =========================================
+   Zera margens/paddings e define box-sizing para facilitar layout.
+   box-sizing: border-box -> largura/altura incluem padding e borda.
+*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: system-ui, Arial, sans-serif;
+}
+/* =========================================
+   3) BODY (fundo e cor do texto geral)
+   =========================================
+   Define o fundo com gradient + cor do texto.
+*/
+body {
+  background: radial-gradient(circle at top, #4e578c, var(--bg)); /* fundo com “luz” em cima */
+  color: var(--text); /* texto padrão */
+  min-height: 100vh;  /*ocupa altura total da tela */
+}
+
+/* Texto secundário (descrições e dicas) */
+.muted {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+/* =========================================
+   4) TOPBAR (cabeçalho fixo no topo)
+   =========================================
+   sticky = cola no topo quando rola a página.
+   backdrop-filter = “vidro fosco” (efeito blur) atrás.
+*/
+
+.topbar {
+  position: sticky;
+  top: 0;
+  background: rgba(15, 18, 32, 0.85); /* fundo semi-transparente */
+  border-bottom: 1px solid var(--border);
+  padding: 14px 16px;
+  z-index: 10;                        /* fica por cima dos elementos */
+}
+
+/* Parte do “logo + nome do app” */
+.brand {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+/* “Logo” em formato de quadradinho com emoji */
+.logo {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: var(--card);
+
+  /* centraliza o emoji no meio */
+  display: grid;
+  place-items: center;
+
+  font-size: 1.2rem;
+  border: 1px solid var(--border);
+}
+
+/* Título do app */
+.brand h1 {
+  font-size: 1.15rem;
+}
+
+
+/* =========================================
+   5) NAV (botões de navegação das telas)
+   =========================================
+   Os botões ficam lado a lado e com espaçamento.
+*/
+.nav {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+/* Botões tipo “abas” (Cardápio, Favoritos, Carrinho) */
+.tab-btn {
+  flex: 1;                                /* cada botão ocupa o mesmo espaço */
+  padding: 10px 10px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text);
+  cursor: pointer;
+
+  /* animações suaves */
+  transition: transform 0.12s ease, background 0.12s ease;
+  font-weight: 600;
+}
+
+/* Quando passa o mouse, sobe 1px (efeito de “clique”) */
+.tab-btn:hover {
+  transform: translateY(-1px);
+}
+
+/* Botão ativo (aba atual) */
+.tab-btn.active {
+  background: rgba(108, 92, 231, 0.25);
+  border-color: rgba(108, 92, 231, 0.5);
+}
+
+
+/* =========================================
+   6) BADGE (bolinha com número do carrinho)
+   ========================================= */
